@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moonpaw Prints — Custom Bedtime Board Books</title>
+  <meta name="description" content="Moonpaw Prints creates personalized bedtime board books featuring your baby and your dog. Each book in the Goodnight series is a one-of-a-kind keepsake." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0c1a3a;
+      --navy-mid: #152952;
+      --gold: #c9a44a;
+      --gold-light: #e8c96e;
+      --gold-pale: #f0dca0;
+      --cream: #faf6ee;
+      --cream-dark: #ede5d4;
+      --ink: #1a1610;
+      --muted: #7a7062;
+      --white: #fffcf7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 40px;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+    }
+
+    /* subtle star field */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1.5px 1.5px at 10% 15%, rgba(201,164,74,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 8%, rgba(201,164,74,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 20%, rgba(201,164,74,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 10%, rgba(201,164,74,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 18%, rgba(201,164,74,0.15) 0%, transparent 100%);
+    }
+
+    .logo {
+      width: min(360px, 70vw);
+      margin-bottom: 40px;
+      animation: fadeIn 0.8s ease both;
+    }
+
+    .logo img { width: 100%; display: block; }
+
+    .cover-art {
+      width: min(320px, 65vw);
+      margin-bottom: 36px;
+      animation: fadeIn 0.8s 0.15s ease both;
+    }
+
+    .cover-art img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow:
+        0 20px 60px rgba(12,26,58,0.25),
+        0 0 0 1px rgba(201,164,74,0.15);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 480px;
+      margin-bottom: 40px;
+      animation: fadeIn 0.8s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeIn 0.8s 0.45s ease both;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: var(--gold-light);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(12,26,58,0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-ghost:hover {
+      background: var(--navy);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── BOOK PREVIEW ── */
+    .book-section {
+      padding: 80px 24px;
+      background: var(--navy);
+      position: relative;
+    }
+
+    .book-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1.5px 1.5px at 8% 12%, rgba(255,235,130,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 6%, rgba(255,235,130,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 18%, rgba(255,235,130,0.35) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 70% 8%, rgba(255,235,130,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 15%, rgba(255,235,130,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 90%, rgba(255,235,130,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 85%, rgba(255,235,130,0.25) 0%, transparent 100%);
+    }
+
+    .book-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .bp-viewer {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .bp-spread {
+      width: 100%;
+      display: block;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .bp-spread.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .bp-spread img {
+      width: 100%;
+      display: block;
+    }
+
+    .bp-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(12,26,58,0.95);
+    }
+
+    .bp-btn {
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      color: var(--gold-light);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .bp-btn:hover {
+      background: rgba(201,164,74,0.15);
+      border-color: var(--gold);
+    }
+
+    .bp-btn:disabled { opacity: 0.2; cursor: default; }
+    .bp-btn:disabled:hover { background: none; border-color: rgba(255,255,255,0.15); }
+
+    .bp-info { text-align: center; }
+
+    .bp-page-label {
+      color: var(--gold-light);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: block;
+    }
+
+    .bp-page-desc {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.72rem;
+      font-style: italic;
+    }
+
+    .bp-dots {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .bp-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      padding: 0;
+    }
+
+    .bp-dot.active { background: var(--gold); transform: scale(1.4); }
+    .bp-dot:hover { background: var(--gold-light); }
+
+    .bp-caption {
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: none;
+    }
+
+    .bp-caption-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      color: rgba(255,252,245,0.8);
+      line-height: 1.9;
+      white-space: pre-line;
+      font-style: italic;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      padding: 80px 24px;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .newsletter-inner {
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .newsletter .section-label { color: var(--gold); }
+
+    .newsletter .section-title {
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .newsletter-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1.5px solid var(--cream-dark);
+      background: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-form input::placeholder { color: #b5a994; }
+    .newsletter-form input:focus { border-color: var(--gold); }
+
+    .newsletter-form button {
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: var(--gold-light);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--navy-mid);
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 24px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 36px; }
+      .cover-art { width: min(280px, 80vw); }
+      .logo { width: min(280px, 75vw); }
+      .bp-btn { width: 34px; height: 34px; font-size: 15px; }
+      .bp-controls { padding: 10px 14px; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="logo">
+      <img src="images/moonpaw-logo.png" alt="Moonpaw Prints" />
+    </div>
+
+    <div class="cover-art">
+      <img src="images/goodnight-wrigley-cover.png" alt="Goodnight, Wrigley! — A Bedtime Story for Baby James" />
+    </div>
+
+    <p class="tagline">
+      Personalized bedtime board books starring your baby and your dog.
+      Each book in the Goodnight series is illustrated, printed, and made
+      just for your family — a keepsake they'll reach for every night.
+    </p>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#book">Read the Book</a>
+      <a class="btn btn-ghost" href="#signup">Join the Waitlist</a>
+    </div>
+
+    <div class="scroll-hint">scroll to explore ↓</div>
+  </section>
+
+  <!-- BOOK PREVIEW -->
+  <section class="book-section" id="book">
+    <div class="book-inner">
+      <div class="section-label">Flip through the pages</div>
+      <div class="section-title">Goodnight, Wrigley!</div>
+
+      <div class="bp-viewer" id="bp-viewer">
+        <div class="bp-spread active" data-index="0"><img src="images/spread_Goodnight_Wrigley.jpg" alt="Cover"></div>
+        <div class="bp-spread" data-index="1"><img src="images/spread_1-2.jpg" alt="Title Page"></div>
+        <div class="bp-spread" data-index="2"><img src="images/spread_2-3.jpg" alt="Sunset"></div>
+        <div class="bp-spread" data-index="3"><img src="images/spread_3-4.jpg" alt="Getting ready"></div>
+        <div class="bp-spread" data-index="4"><img src="images/spread_5-6.jpg" alt="Reading"></div>
+        <div class="bp-spread" data-index="5"><img src="images/spread_7-8.jpg" alt="Guardian"></div>
+        <div class="bp-spread" data-index="6"><img src="images/spread_9-10.jpg" alt="Goodnight"></div>
+        <div class="bp-spread" data-index="7"><img src="images/spread_11-12.jpg" alt="Constellation"></div>
+
+        <div class="bp-controls">
+          <button class="bp-btn" id="bp-prev" aria-label="Previous">‹</button>
+          <div class="bp-info">
+            <span class="bp-page-label" id="bp-page-label">Cover</span>
+            <span class="bp-page-desc" id="bp-page-desc"></span>
+          </div>
+          <button class="bp-btn" id="bp-next" aria-label="Next">›</button>
+        </div>
+      </div>
+
+      <div class="bp-dots" id="bp-dots"></div>
+
+      <div class="bp-caption" id="bp-caption">
+        <div class="bp-caption-text" id="bp-caption-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="signup">
+    <div class="newsletter-inner">
+      <div class="section-label">Coming soon</div>
+      <div class="section-title">Create yours</div>
+      <p class="newsletter-sub">Be the first to know when custom books are available. Drop your email and we'll let you know.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="your@email.com" aria-label="Email address" />
+        <button type="submit">Notify Me</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Moonpaw Prints — The Goodnight Series
+  </footer>
+
+  <script>
+  (function(){
+    var pages = [
+      { label: "Cover", desc: "", text: "" },
+      { label: "Title Page", desc: "Pages 1–2", text: "" },
+      { label: "The Day Says Goodbye", desc: "Pages 3–4", text: "The sun sank low,\nthe sky turned gold and pink,\nand the day said goodbye.\n\nWrigley let out\none great big yawn\nand the daylight was gone." },
+      { label: "Getting Ready for Bed", desc: "Pages 5–6", text: "James splashed and giggled.\nRosy cheeks, squeaky duck,\nthe sleepiest baby around.\n\nBlue pajamas, soft and bright with\nlittle stars on every inch.\nJames was ready for the night." },
+      { label: "Moonlight and Dreams", desc: "Pages 7–8", text: "They curled up close,\na boy and his dog,\nlost in moonlight and dreams.\n\nOne star, then two, then three—\n\"Look, Wrigley!\" said James,\n\"Those stars are for you and me.\"" },
+      { label: "A Furry Guardian", desc: "Pages 9–10", text: "James lay down to finally rest,\nand Wrigley watched,\na furry guardian, the very best.\n\nJames took one last peek,\nthen closed his sleepy eyes,\nas moonbeams filled the skies." },
+      { label: "Goodnight", desc: "Pages 11–12", text: "Goodnight, little lamp.\nGoodnight, gentle moon.\nGoodnight, tiny stars.\n\nAnd there in the quiet,\na boy and his dog\nslept under the same silent sky." },
+      { label: "The Constellation", desc: "End Page", text: "" }
+    ];
+
+    var current = 0;
+    var viewer = document.getElementById("bp-viewer");
+    if (!viewer) return;
+    var spreads = viewer.querySelectorAll(".bp-spread");
+    var dotsEl = document.getElementById("bp-dots");
+    var captionEl = document.getElementById("bp-caption");
+    var captionText = document.getElementById("bp-caption-text");
+    var pageLabel = document.getElementById("bp-page-label");
+    var pageDesc = document.getElementById("bp-page-desc");
+    var prevBtn = document.getElementById("bp-prev");
+    var nextBtn = document.getElementById("bp-next");
+
+    pages.forEach(function(_, i) {
+      var dot = document.createElement("button");
+      dot.className = "bp-dot" + (i === 0 ? " active" : "");
+      dot.onclick = function() { goTo(i); };
+      dotsEl.appendChild(dot);
+    });
+
+    function goTo(idx) {
+      if (idx < 0 || idx >= pages.length) return;
+      spreads[current].classList.remove("active");
+      dotsEl.children[current].classList.remove("active");
+      current = idx;
+      spreads[current].classList.add("active");
+      dotsEl.children[current].classList.add("active");
+      pageLabel.textContent = pages[current].label;
+      pageDesc.textContent = pages[current].desc;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === pages.length - 1;
+      if (pages[current].text) {
+        captionEl.style.display = "block";
+        captionText.textContent = pages[current].text;
+      } else {
+        captionEl.style.display = "none";
+      }
+    }
+
+    prevBtn.onclick = function() { goTo(current - 1); };
+    nextBtn.onclick = function() { goTo(current + 1); };
+
+    var touchX = 0;
+    viewer.addEventListener("touchstart", function(e) { touchX = e.touches[0].clientX; }, { passive: true });
+    viewer.addEventListener("touchend", function(e) {
+      var diff = touchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+    }, { passive: true });
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "ArrowRight") goTo(current + 1);
+      if (e.key === "ArrowLeft") goTo(current - 1);
+    });
+
+    goTo(0);
+  })();
+  </script>
+
+</body>
+</html>
