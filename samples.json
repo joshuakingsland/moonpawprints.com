@@ -22,6 +22,61 @@
       },
       {
         "label": "Title Page",
+        "desc": "Pages 1ÃÂ¢ÃÂÃÂ2"
+      },
+      {
+        "label": "Sunset & Yawn",
+        "desc": "Pages 3ÃÂ¢ÃÂÃÂ4"
+      },
+      {
+        "label": "Getting Cozy",
+        "desc": "Pages 5ÃÂ¢ÃÂÃÂ6"
+      },
+      {
+        "label": "Reading Together",
+        "desc": "Pages 7ÃÂ¢ÃÂÃÂ8"
+      },
+      {
+        "label": "Stargazing",
+        "desc": "Pages 9ÃÂ¢ÃÂÃÂ10"
+      },
+      {
+        "label": "Guardian",
+        "desc": "Pages 11ÃÂ¢ÃÂÃÂ12"
+      },
+      {
+        "label": "Goodnight",
+        "desc": "Pages 13ÃÂ¢ÃÂÃÂ14"
+      },
+      {
+        "label": "Constellation",
+        "desc": "Pages 15ÃÂ¢ÃÂÃÂ16"
+      }
+    ]
+  },
+  {
+    "id": "liberty",
+    "title": "Goodnight, Liberty!",
+    "subtitle": "A Bedtime Story for Baby Zachary",
+    "folder": "liberty",
+    "spreads": [
+      "cover",
+      "1-2",
+      "3-4",
+      "5-6",
+      "7-8",
+      "9-10",
+      "11-12",
+      "13-14",
+      "15-16"
+    ],
+    "pages": [
+      {
+        "label": "Cover",
+        "desc": ""
+      },
+      {
+        "label": "Title Page",
         "desc": "Pages 1Ã¢ÂÂ2"
       },
       {
@@ -55,10 +110,10 @@
     ]
   },
   {
-    "id": "liberty",
-    "title": "Goodnight, Liberty!",
-    "subtitle": "A Bedtime Story for Baby Zachary",
-    "folder": "liberty",
+    "id": "maxwell",
+    "title": "Goodnight, Maxwell!",
+    "subtitle": "A Bedtime Story for Baby Scott",
+    "folder": "maxwell",
     "spreads": [
       "cover",
       "1-2",
@@ -110,10 +165,10 @@
     ]
   },
   {
-    "id": "maxwell",
-    "title": "Goodnight, Maxwell!",
-    "subtitle": "A Bedtime Story for Baby Scott",
-    "folder": "maxwell",
+    "id": "wrigs",
+    "title": "Goodnight, Wrigs!",
+    "subtitle": "A Bedtime Story for Baby Jamie",
+    "folder": "wrigs",
     "spreads": [
       "cover",
       "1-2",
