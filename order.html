@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Your Custom Book — Moonpaw Prints</title>
+  <meta name="description" content="Order a personalized bedtime board book featuring your baby and your dog. Handcrafted by Moonpaw Prints." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0c1a3a;
+      --navy-mid: #152952;
+      --gold: #c9a44a;
+      --gold-light: #e8c96e;
+      --gold-pale: #f0dca0;
+      --cream: #faf6ee;
+      --cream-dark: #ede5d4;
+      --ink: #1a1610;
+      --muted: #7a7062;
+      --white: #fffcf7;
+      --error: #9e3a34;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--cream-dark);
+      background: var(--cream);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-logo { height: 36px; }
+    .nav-logo img { height: 100%; display: block; }
+    .nav-back {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--navy); }
+
+    /* ── HERO ── */
+    .order-hero {
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
+    }
+    .order-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1.5px 1.5px at 10% 15%, rgba(201,164,74,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 8%, rgba(201,164,74,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 20%, rgba(201,164,74,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 10%, rgba(201,164,74,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 18%, rgba(201,164,74,0.15) 0%, transparent 100%);
+    }
+    .hero-label {
+      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px; position: relative;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 500;
+      color: var(--navy); font-style: italic; margin-bottom: 12px; position: relative;
+    }
+    .hero-sub {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.7;
+      max-width: 520px; margin: 0 auto; font-weight: 300; position: relative;
+    }
+
+    /* ── FORM CONTAINER ── */
+    .form-wrap { max-width: 640px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── SECTIONS ── */
+    .form-section { margin-bottom: 40px; }
+    .section-divider {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+    }
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--cream-dark);
+    }
+    .section-number {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--navy); color: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--navy); white-space: nowrap;
+    }
+
+    /* ── FIELDS ── */
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+    }
+    .field-full { grid-column: 1 / -1; }
+    .field-group { display: flex; flex-direction: column; }
+    .field-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+    }
+    .field-label .optional {
+      font-weight: 400; text-transform: none; letter-spacing: 0; color: #b5a994;
+    }
+    .field-input {
+      padding: 12px 16px; border-radius: 10px;
+      border: 1.5px solid var(--cream-dark); background: var(--white);
+      font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--ink);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+    }
+    .field-input::placeholder { color: #c4b9a8; }
+    .field-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,164,74,0.1);
+    }
+    select.field-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%237a7062' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    textarea.field-input { resize: vertical; min-height: 80px; line-height: 1.6; }
+    .field-hint { font-size: 0.75rem; color: #b5a994; margin-top: 4px; line-height: 1.5; }
+
+    /* ── PHOTOS ── */
+    .photo-section { margin-bottom: 16px; }
+    .photo-label-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+    .photo-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .photo-thumb-wrap { position: relative; width: 90px; height: 90px; }
+    .photo-thumb {
+      width: 90px; height: 90px; object-fit: cover;
+      border-radius: 10px; border: 1.5px solid var(--cream-dark);
+    }
+    .photo-remove {
+      position: absolute; top: -6px; right: -6px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--error); color: #fff; font-size: 12px;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; line-height: 1;
+    }
+    .photo-add {
+      width: 90px; height: 90px; border-radius: 10px;
+      border: 2px dashed var(--cream-dark);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      cursor: pointer; background: var(--white);
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 0.65rem; color: var(--muted); gap: 2px;
+    }
+    .photo-add:hover { border-color: var(--gold); background: rgba(201,164,74,0.04); }
+    .photo-add-icon { font-size: 20px; color: var(--gold); line-height: 1; }
+    .photo-privacy {
+      font-size: 0.72rem; color: #b5a994; margin-top: 8px; line-height: 1.5;
+      padding: 10px 14px; background: rgba(201,164,74,0.06);
+      border-radius: 8px; border: 1px solid rgba(201,164,74,0.12);
+    }
+    .photo-privacy strong { color: var(--muted); }
+
+    /* ── PRICE BANNER ── */
+    .price-banner {
+      text-align: center; padding: 28px 24px;
+      background: var(--navy); border-radius: 14px;
+      margin-bottom: 32px; position: relative; overflow: hidden;
+    }
+    .price-banner::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 15% 30%, rgba(255,235,130,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 20%, rgba(255,235,130,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 80%, rgba(255,235,130,0.2) 0%, transparent 100%);
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.2rem; font-weight: 600; color: var(--gold-light); position: relative;
+    }
+    .price-desc {
+      font-size: 0.8rem; color: rgba(255,252,245,0.55);
+      margin-top: 4px; position: relative;
+    }
+
+    /* ── INCLUDES ── */
+    .includes-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-bottom: 32px;
+    }
+    .includes-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: var(--muted);
+      padding: 10px 14px; background: var(--white);
+      border-radius: 10px; border: 1px solid var(--cream-dark);
+    }
+    .includes-check { color: var(--gold); font-size: 0.9rem; flex-shrink: 0; }
+
+    /* ── SUBMIT ── */
+    .submit-section { text-align: center; }
+    .submit-btn {
+      display: inline-block; padding: 16px 48px;
+      border-radius: 999px; background: var(--navy); color: var(--gold-light);
+      font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: none; cursor: pointer; transition: all 0.25s ease;
+      width: 100%; max-width: 400px;
+    }
+    .submit-btn:hover {
+      background: var(--navy-mid); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(12,26,58,0.3);
+    }
+    .submit-btn:disabled { opacity: 0.5; cursor: default; transform: none; box-shadow: none; }
+    .submit-note {
+      font-size: 0.75rem; color: #b5a994; margin-top: 12px; line-height: 1.5;
+    }
+
+    /* ── SUCCESS ── */
+    .success-card {
+      display: none; text-align: center; padding: 60px 32px;
+      background: var(--white); border-radius: 16px;
+      border: 1px solid var(--cream-dark);
+      box-shadow: 0 4px 24px rgba(12,26,58,0.06);
+    }
+    .success-icon { font-size: 3rem; margin-bottom: 16px; }
+    .success-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.6rem; font-weight: 600; color: var(--navy); margin-bottom: 8px;
+    }
+    .success-text {
+      font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+      max-width: 400px; margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 24px; text-align: center; font-size: 0.75rem;
+      color: var(--muted); letter-spacing: 0.06em;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .field-row { grid-template-columns: 1fr; }
+      .includes-list { grid-template-columns: 1fr; }
+      .nav { padding: 12px 16px; }
+      .order-hero { padding: 40px 20px 28px; }
+      .form-wrap { padding: 0 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-logo" href="index.html"><img src="images/moonpaw-logo.png" alt="Moonpaw Prints" /></a>
+    <a class="nav-back" href="index.html">&larr; Back to Home</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="order-hero">
+    <div class="hero-label">The Goodnight Series</div>
+    <h1 class="hero-title">Create Your Custom Book</h1>
+    <p class="hero-sub">Tell us about your baby and your dog, and we'll create a one-of-a-kind bedtime board book just for your family.</p>
+  </section>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+
+    <!-- PRICE -->
+    <div class="price-banner">
+      <div class="price-amount">$64.99</div>
+      <div class="price-desc">Personalized, printed &amp; shipped to your door</div>
+    </div>
+
+    <div class="includes-list">
+      <div class="includes-item"><span class="includes-check">&#10022;</span> Custom illustrations</div>
+      <div class="includes-item"><span class="includes-check">&#10022;</span> Personalized story</div>
+      <div class="includes-item"><span class="includes-check">&#10022;</span> Premium board book</div>
+      <div class="includes-item"><span class="includes-check">&#10022;</span> Free shipping</div>
+    </div>
+
+    <form id="order-form" onsubmit="return handleSubmit(event)">
+
+      <!-- 1: DOG -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-number">1</span>
+          <span class="section-heading">Your Dog</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="dog-name">Dog's Name</label>
+            <input class="field-input" type="text" id="dog-name" name="dog_name" placeholder="Wrigley" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="breed">Breed</label>
+            <input class="field-input" type="text" id="breed" name="breed" placeholder="Golden Retriever" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="coat">Coat / Appearance</label>
+            <input class="field-input" type="text" id="coat" name="coat_description" placeholder="Golden white, fluffy, friendly eyes" required />
+            <div class="field-hint">Color, texture, markings, size &mdash; anything that makes your dog unique.</div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-label-row">
+            <span class="field-label" style="margin-bottom:0">Dog Photos</span>
+            <span class="field-label optional" style="margin-bottom:0">(up to 3, highly recommended)</span>
+          </div>
+          <div class="photo-grid" id="dog-photo-grid">
+            <label class="photo-add" id="dog-photo-add">
+              <span class="photo-add-icon">+</span>
+              <span>Add Photo</span>
+              <input type="file" accept="image/*" multiple hidden onchange="handlePhotos(this,'dog',3)" />
+            </label>
+          </div>
+          <div class="field-hint">Photos help us capture your dog's exact look. The more angles, the better!</div>
+        </div>
+      </div>
+
+      <!-- 2: BABY -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-number">2</span>
+          <span class="section-heading">Your Baby</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="baby-name">Baby's Name</label>
+            <input class="field-input" type="text" id="baby-name" name="baby_name" placeholder="James" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="gender">Gender</label>
+            <select class="field-input" id="gender" name="baby_gender">
+              <option value="boy">Boy</option>
+              <option value="girl">Girl</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="pj-color">Pajama Color</label>
+            <input class="field-input" type="text" id="pj-color" name="pajama_color" placeholder="blue" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="toy">Favorite Toy <span class="optional">(optional)</span></label>
+            <input class="field-input" type="text" id="toy" name="favorite_toy" placeholder="brown teddy bear" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="baby-desc">Baby Description <span class="optional">(optional but helpful)</span></label>
+            <input class="field-input" type="text" id="baby-desc" name="baby_description" placeholder="Blonde hair, big brown eyes, rosy cheeks, about 1 year old" />
+            <div class="field-hint">Hair color, eye color, skin tone, approximate age &mdash; helps us even without photos.</div>
+          </div>
+        </div>
+
+        <div class="photo-section">
+          <div class="photo-label-row">
+            <span class="field-label" style="margin-bottom:0">Baby Photos</span>
+            <span class="field-label optional" style="margin-bottom:0">(up to 2, optional)</span>
+          </div>
+          <div class="photo-grid" id="baby-photo-grid">
+            <label class="photo-add" id="baby-photo-add">
+              <span class="photo-add-icon">+</span>
+              <span>Add Photo</span>
+              <input type="file" accept="image/*" multiple hidden onchange="handlePhotos(this,'baby',2)" />
+            </label>
+          </div>
+          <div class="photo-privacy">
+            <strong>Your privacy matters.</strong> Baby photos are completely optional and only used to guide illustration style &mdash; hair color, eye color, and features. Photos are never stored, shared, or used for anything else. A written description works great too.
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: SHIPPING -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-number">3</span>
+          <span class="section-heading">Shipping &amp; Contact</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="email">Email</label>
+            <input class="field-input" type="email" id="email" name="email" placeholder="you@email.com" required />
+            <div class="field-hint">We'll send your digital proof here for approval before printing.</div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="full-name">Full Name</label>
+            <input class="field-input" type="text" id="full-name" name="full_name" placeholder="Jane Smith" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="address1">Street Address</label>
+            <input class="field-input" type="text" id="address1" name="address_line1" placeholder="123 Main St" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="address2">Apt / Suite / Unit <span class="optional">(optional)</span></label>
+            <input class="field-input" type="text" id="address2" name="address_line2" placeholder="Apt 4B" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="city">City</label>
+            <input class="field-input" type="text" id="city" name="city" placeholder="Richmond" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="state">State</label>
+            <input class="field-input" type="text" id="state" name="state" placeholder="VA" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="zip">Zip Code</label>
+            <input class="field-input" type="text" id="zip" name="zip" placeholder="23220" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="phone">Phone <span class="optional">(optional)</span></label>
+            <input class="field-input" type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: NOTES -->
+      <div class="form-section">
+        <div class="section-divider">
+          <span class="section-number">4</span>
+          <span class="section-heading">Anything Else?</span>
+        </div>
+        <div class="field-row">
+          <div class="field-group field-full">
+            <label class="field-label" for="notes">Special Requests <span class="optional">(optional)</span></label>
+            <textarea class="field-input" id="notes" name="notes" placeholder="Anything you'd like us to know &#8212; gift message, special details, or questions."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-section">
+        <button type="submit" class="submit-btn" id="submit-btn">Place Order &mdash; $64.99</button>
+        <p class="submit-note">Payment details will be sent to your email after we receive your order.<br>You'll receive a digital proof to approve before we print.</p>
+      </div>
+
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success-card" id="success-card">
+      <div class="success-icon">&#128062;</div>
+      <h2 class="success-title">Order Received!</h2>
+      <p class="success-text">
+        Thank you! We've received your book details and will get started right away.
+        Check your email for payment instructions and expect a digital proof
+        within 3&ndash;5 business days for your approval.
+      </p>
+    </div>
+
+  </div>
+
+  <footer class="footer">Moonpaw Prints &mdash; The Goodnight Series</footer>
+
+  <script>
+  // ── PHOTO HANDLING ──
+  const photos = { dog: [], baby: [] };
+
+  function handlePhotos(input, type, max) {
+    const files = Array.from(input.files);
+    const remaining = max - photos[type].length;
+    const toAdd = files.slice(0, remaining);
+    toAdd.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        photos[type].push({ file, dataUrl: e.target.result });
+        renderPhotos(type, max);
+      };
+      reader.readAsDataURL(file);
+    });
+    input.value = '';
+  }
+
+  function removePhoto(type, index, max) {
+    photos[type].splice(index, 1);
+    renderPhotos(type, max);
+  }
+
+  function renderPhotos(type, max) {
+    const grid = document.getElementById(type + '-photo-grid');
+    const addBtn = document.getElementById(type + '-photo-add');
+    grid.querySelectorAll('.photo-thumb-wrap').forEach(el => el.remove());
+    photos[type].forEach((p, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'photo-thumb-wrap';
+      wrap.innerHTML = `<img class="photo-thumb" src="${p.dataUrl}" alt="Photo ${i+1}" /><button type="button" class="photo-remove" onclick="removePhoto('${type}',${i},${max})">&times;</button>`;
+      grid.insertBefore(wrap, addBtn);
+    });
+    addBtn.style.display = photos[type].length >= max ? 'none' : 'flex';
+  }
+
+  // ── FORM SUBMISSION ──
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('order-form');
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    try {
+      const formData = new FormData(form);
+      const submitData = new FormData();
+      for (const [key, value] of formData.entries()) {
+        submitData.append(key, value);
+      }
+      submitData.append('dog_photo_count', photos.dog.length);
+      submitData.append('baby_photo_count', photos.baby.length);
+      photos.dog.forEach((p, i) => submitData.append('dog_photo_' + (i+1), p.file));
+      photos.baby.forEach((p, i) => submitData.append('baby_photo_' + (i+1), p.file));
+
+      // ── REPLACE WITH YOUR FORMSPREE ID ──
+      const endpoint = 'https://formspree.io/f/myknvrzd';
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: submitData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        document.querySelector('.price-banner').style.display = 'none';
+        document.querySelector('.includes-list').style.display = 'none';
+        document.getElementById('success-card').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      alert('Something went wrong \u2014 please try again or email us directly.');
+      btn.disabled = false;
+      btn.textContent = 'Place Order \u2014 $64.99';
+    }
+  }
+  </script>
+
+</body>
+</html>
